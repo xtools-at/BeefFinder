@@ -1,0 +1,73 @@
+ /*Global*/
+
+html, body, body>#app, body>#app>div {height:100%;}
+
+.row.overall-container {
+	height: 100%;
+	margin-bottom:0;
+  position:relative;
+  overflow-x: hidden;
+}
+
+ /*Nav,Header,Footer*/
+
+nav .brand-logo {
+	padding:0 15px;
+
+	i{
+		font-weight:normal;
+		margin-right:10px;
+	}
+}
+
+footer.page-footer {
+	margin-top:0;
+}
+  
+
+/*Maps*/
+
+#map-container {
+	position:relative;
+	height:calc(100% - 80px);
+}
+
+#map {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+ }
+
+ /*Misc*/
+
+.switch {
+  margin-top:20px;
+	margin-bottom:15px;
+}
+
+.preloader-wrapper.big {
+  margin: calc(50% - 32px);
+}
+
+
+/*Screen Reader only*/
+.sr-only {
+    border: 0 none;
+    clip: rect(0px, 0px, 0px, 0px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.sr-only-focusable:active, .sr-only-focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
