@@ -1,0 +1,16 @@
+@media #{$large-and-up} {
+    .side-nav {
+    	transform: translateX(0px) !important;
+    	height: calc(100% - 64px);
+    	margin-top:64px;
+    }
+
+    .drag-target, #sidenav-overlay {
+    	display:none;
+    }
+
+    body {
+    	overflow:auto !important;
+    	width:auto !important;
+    }
+}

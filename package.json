@@ -1,7 +1,7 @@
 {
-  "name": "MeetUp",
+  "name": "BeefFinder",
   "version": "1.0.0",
-  "description": "Event planer app project for Udacity Senior Web Developer Nanodegree, using React, Redux, Node.js, Firebase and Materialize.css",
+  "description": "Restaurant Reviewer app project for Udacity Senior Web Developer Nanodegree, using React, Redux, Node.js, Firebase and Materialize.css",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test karma start",
@@ -11,9 +11,9 @@
   "author": "Martin Kainzbauer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xtools-at/MeetUp.git"
+    "url": "https://github.com/xtools-at/BeefFinder.git"
   },
-  "license": "GNU GPLv3",
+  "license": "GPL-3.0",
   "dependencies": {
     "axios": "^0.9.1",
     "babel-core": "^6.5.1",

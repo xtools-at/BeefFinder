@@ -43,72 +43,28 @@ export var Header = React.createClass({
     		navIconActive="active"
     	}
 
-    	function renderLinks(self){
-			if (user) {
-			 return(
-			    <ul className="right hide-on-med-and-down" onClick={self.untoggleMap}>
-					<li><a className="waves-effect" href="#/add"><i className="material-icons left">add</i>Add Event</a></li>
-			        <li><a className="waves-effect" href="#/" onClick={self.onLogout}><i className="material-icons left">close</i>Logout</a></li>
-			        <li><a className="waves-effect" href="https://github.com/xtools-at/MeetUp" target="_blank"><i className="material-icons left">code</i>Fork on Github</a></li>
-			    </ul>
-			 );
-			} else {
-				return(
-			      <ul className="right hide-on-med-and-down" onClick={self.untoggleMap}>
-					<li><a className="waves-effect" href="#/login"><i className="material-icons left">account_circle</i>Login</a></li>
-			        <li><a className="waves-effect" href="https://github.com/xtools-at/MeetUp" target="_blank"><i className="material-icons left">code</i>Fork on Github</a></li>
-			      </ul>
-			    );
-			}
-    	}
-
-    	function renderMobileNav(self){
-				if (user){
-					return (
-						<ul id="mobile-nav" className="side-nav" onClick={self.untoggleMap}>
-						    <li><div className="userView">
-						      <img className="background" src="/images/bg_nav.png" />
-						      <img className="circle" src="/images/useravatar.png" />
-						      <span className="white-text name">{user.displayName}</span>
-						      <span className="white-text email">{user.email}</span>
-						    </div></li>
-						    <li><a className="waves-effect" href="#/add" onClick={self.hideNav}><i className="material-icons">add</i>Add Event</a></li>
-						    <li><a className="waves-effect" href="#/" onClick={self.onLogout}><i className="material-icons">close</i>Logout</a></li>
-						    <li><div className="divider"></div></li>
-						    <li><a className="waves-effect" href="https://github.com/xtools-at/MeetUp" target="_blank"><i className="material-icons">code</i>Fork on Github</a></li>
-					    </ul>
-					);
-				} else {
-					return(
-						<ul id="mobile-nav" className="side-nav" onClick={self.untoggleMap}>
-						    <li><div className="userView">
-						    	<img className="background" src="/images/bg_nav.png" />
-						      	<a href="#/login"><span className="white-text name">Not logged in</span></a>
-						    </div></li>
-						    <li><a className="waves-effect" href="#/login" onClick={self.hideNav}><i className="material-icons">account_circle</i>Login</a></li>
-				        	<li><div className="divider"></div></li>
-						    <li><a className="waves-effect" href="https://github.com/xtools-at/MeetUp" target="_blank"><i className="material-icons">code</i>Fork on Github</a></li>
-					    </ul>
-					);
-				}
-    	}
-
       return (
-        <header>
+        <header className="navbar-fixed">
          	<nav>
 			    <div className="nav-wrapper">
-		      	<a href="#/" className="brand-logo" onClick={this.untoggleMap}><i className="material-icons">event_note</i>MeetUp</a>
-		      	<a data-activates="mobile-nav" className="button-collapse"><i className="material-icons">menu</i></a>
-						<ul className="right">
-				 			<li className={navIconActive}>
-				 				<a href="#/" onClick={this.toggleMap}>
-					 				<i className="material-icons left">map</i>
-					 				<span className="sr-only">Toggle Map</span>
-					 			</a>
-					 		</li>
-				 		</ul>
-			  		{renderLinks(this)}
-			  		{renderMobileNav(this)}
+		      	<a href="#/" className="brand-logo"><i className="material-icons">restaurant</i>BeefFinder</a>
+		      	<a data-activates="nav" className="button-collapse"><i className="material-icons">menu</i></a>
+				  		<ul className="right">
+				        	<li><a className="waves-effect" href="https://github.com/xtools-at/BeefFinder" target="_blank">
+				        		<i className="material-icons left">code</i>
+				        		<span className="hide-on-med-and-down">Fork on Github</span>
+				        	</a></li>
+				      	</ul>
+			  			<ul id="nav" className="side-nav">
+				  			<li className="hide-on-large-only"><div className="userView center">
+							      <img className="background" src="/images/bg_nav.png" />
+							      <i className="material-icons">restaurant_menu</i>
+							      <span className="white-text name">Menu</span>
+							</div></li>
+						    <li><a className="waves-effect" href="#/login" onClick={self.hideNav}><i className="material-icons">account_circle</i>Login</a></li>
+				        	<li><div className="divider"></div></li>
+						    <li><a className="waves-effect" href="https://github.com/xtools-at/BeefFinder" target="_blank"><i className="material-icons">code</i>Fork on Github</a></li>
+					    </ul>
 			    </div>
 		  	</nav>
       </header>

@@ -1,0 +1,26 @@
+componentDidMount: function () {
+  var location = this.props.location.query.location;
+
+  if (location && location.length > 0) {
+    this.handleSearch(location);
+    window.location.hash = '#/';
+  }
+},
+   
+   
+<Link to='/?location=Philadelphia'>Philadelphia, PA</Link>
+
+
+
+
+onSearch: function (e) {
+      e.preventDefault();
+
+      var location = this.refs.search.value;
+      var encodedLocation = encodeURIComponent(location);
+
+      if (location.length > 0) {
+        this.refs.search.value = '';
+        window.location.hash = '#/?location=' + encodedLocation;
+      }
+  },

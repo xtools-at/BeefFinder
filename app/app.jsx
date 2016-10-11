@@ -4,7 +4,7 @@ var {Provider} = require('react-redux');
 var {hashHistory} = require('react-router');
 
 import Main from 'Main';
-
+import router from 'app/router/';
 var actions = require('actions');
 var store = require('configureStore').configure();
 
@@ -30,7 +30,7 @@ require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
   <Provider store={store}>
-    <Main/>
+    {router}
   </Provider>,
   document.getElementById('app')
 );
