@@ -101,13 +101,6 @@ export var setActiveEvent = (eventId) => {
   }
 }
 
-export var setMapCenter = (lat, lng) => {
-  return {
-    type: 'SET_MAP_CENTER',
-    mapCenter: {lat, lng}
-  }
-}
-
 export var toggleMap = () => {
   return {
     type: 'TOGGLE_MAP'
@@ -206,5 +199,40 @@ export var startGetEvents = () => {
 export var toggleAdditionalFields = () => {
   return {
     type: 'TOGGLE_SHOW'
+  };
+};
+
+
+
+//####################################################
+
+
+export var getRestaurants = (restaurants) => {
+  return {
+    type: 'GET_RESTAURANTS',
+    restaurants
+  };
+};
+
+export var startGetRestaurants = () => {
+  return (dispatch, getState) => {
+
+    var restaurantsRef = dbRef.child('restaurants');
+
+    return restaurantsRef.once('value').then((snapshot) => {
+      var restaurants = snapshot.val() || {};
+      var parsedRestaurants = [];
+
+      Object.keys(restaurants).forEach((restaurantId) => {
+        parsedRestaurants.push({
+          id: restaurantId,
+          ...restaurants[restaurantId]
+        });
+      });
+
+      console.log('debug', restaurants, parsedRestaurants);
+
+      dispatch(getRestaurants(parsedRestaurants));
+    });
   };
 };

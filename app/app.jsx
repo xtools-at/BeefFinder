@@ -21,8 +21,8 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 
-//fetch Events
-store.dispatch(actions.startGetEvents());
+//fetch Restaurants
+store.dispatch(actions.startGetRestaurants());
 
 
 // App css

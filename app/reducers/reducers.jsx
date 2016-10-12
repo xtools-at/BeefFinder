@@ -83,3 +83,25 @@ export var additionalFieldsReducer = (state = false, action) => {
       return state;
   }
 };
+
+
+//################################################
+
+export var restaurantsReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_RESTAURANT':
+      return [
+        ...state,
+        action.restaurant
+      ];
+    case 'GET_RESTAURANTS':
+      return [
+        ...state,
+        ...action.restaurants
+      ];
+    case 'LOGOUT':
+      return [...state];
+    default:
+      return state;
+  }
+};

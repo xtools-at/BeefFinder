@@ -3,9 +3,10 @@ import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 import Main from 'Main';
 import Login from 'Login';
-import AddEvent from 'AddEvent';
-import EventList from 'EventList';
+
 import firebase from 'app/firebase/';
+
+import RestaurantList from 'RestaurantList';
 
 var requireLogin = (nextState, replace, next) => {
   if (!firebase.auth().currentUser) {
@@ -26,10 +27,9 @@ var redirectIfLoggedIn = (nextState, replace, next) => {
 export default (
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
-      <IndexRoute component={EventList}/>
+      <IndexRoute component={RestaurantList}/>
       <Route path="login" component={Login} />
       <Route path="register" component={Login} />
-      <Route path="add" component={AddEvent} />
     </Route>
   </Router>
 );

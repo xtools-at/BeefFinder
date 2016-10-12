@@ -1,14 +1,14 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {additionalFieldsReducer, authReducer, eventsReducer, storageReducer} from 'reducers'
+import { restaurantsReducer, additionalFieldsReducer, authReducer, storageReducer } from 'reducers'
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
     additionalFields: additionalFieldsReducer,
     auth: authReducer,
-    events: eventsReducer,
-    storage: storageReducer
+    storage: storageReducer,
+    restaurants:  restaurantsReducer
   });
 
   var store = redux.createStore(reducer, initialState, redux.compose(
