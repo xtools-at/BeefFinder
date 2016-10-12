@@ -1,15 +1,18 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 import firebase from 'app/firebase/';
-import sideNav from 'materialize-css/dist/js/materialize.min'
+import sideNav from 'materialize-css/dist/js/materialize.min';
+//import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 //import {hashHistory} from 'react-router';
 
 import * as actions from 'actions';
 
 export var Header = React.createClass({
 	componentDidMount() {
+      //init sideNav
     	$(".button-collapse").sideNav();
 	},
+
 	onLogout(ev){
 		ev.preventDefault();
 		this.hideNav();

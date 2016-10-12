@@ -10,28 +10,27 @@ import Footer from 'Footer';
 export var Main = React.createClass({
 
 	componentDidMount() {
-			//fetch user location
-			var {dispatch} = this.props;
-	    	var coords = axios.get('http://ipinfo.io').then((res) => {
-	    	  //console.log(res.data);
-		      if (res.data.loc){
-		        try{
-		          var latLngArray = res.data.loc.split(',');
+		//fetch user location
+		var {dispatch} = this.props;
+    	var coords = axios.get('http://ipinfo.io').then((res) => {
+    	  //console.log(res.data);
+	      if (res.data.loc){
+	        try{
+	          var latLngArray = res.data.loc.split(',');
 
-		          dispatch(
-		          	{
-					    type: 'STORE_LOCATION',
-					    userLat: latLngArray[0],
-					    userLng: latLngArray[1]
-					 }
-		          );
-		        } catch (e){
-		          //console.log(e);
-		        }
-		      }
-	   		})
+	          dispatch(
+	          	{
+				    type: 'STORE_LOCATION',
+				    userLat: latLngArray[0],
+				    userLng: latLngArray[1]
+				 }
+	          );
+	        } catch (e){
+	          //console.log(e);
+	        }
+	      }
+   		});
 	},
-
 	
     render() {
         return (

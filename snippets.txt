@@ -24,3 +24,24 @@ onSearch: function (e) {
         window.location.hash = '#/?location=' + encodedLocation;
       }
   },
+
+
+
+
+
+  <script>
+    //fix Footer
+    window.onScroll = function(ev) {
+      if ((window.innerHeight + window.scrollY + 64) >= document.body.offsetHeight) {
+        //bottom reached
+        $('#nav').addClass('scrolled-bottom');
+      } else {
+        $('#nav').removeClass('scrolled-bottom');
+      }
+    };
+  </script>
+
+
+  //get scroll to bottom
+      window.addEventListener('scroll', this.handleScroll);
+      console.log('attached event listener onscroll');

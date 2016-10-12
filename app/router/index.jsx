@@ -30,6 +30,7 @@ export default (
       <IndexRoute component={RestaurantList}/>
       <Route path="login" component={Login} />
       <Route path="register" component={Login} />
+      <Route path="restaurant" component={Login} />
     </Route>
   </Router>
 );
