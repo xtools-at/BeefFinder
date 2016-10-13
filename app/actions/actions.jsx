@@ -230,7 +230,7 @@ export var startGetRestaurants = () => {
         });
       });
 
-      console.log('debug', restaurants, parsedRestaurants);
+      //console.log('debug', restaurants, parsedRestaurants);
 
       dispatch(getRestaurants(parsedRestaurants));
     });

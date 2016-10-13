@@ -2,6 +2,7 @@ import React from 'react';
 import * as Redux from 'react-redux';
 
 import RestaurantListItem from 'RestaurantListItem';
+import Preloader from 'Preloader';
 
 export var RestaurantList = React.createClass({
   render() {
@@ -10,17 +11,7 @@ export var RestaurantList = React.createClass({
 
       if (restaurants.length === 0) {
         return (
-          <div className="preloader-wrapper big active">
-	          <div className="spinner-layer">
-	            <div className="circle-clipper left">
-	              <div className="circle"></div>
-	             </div><div className="gap-patch">
-	              <div className="circle"></div>
-	            </div><div className="circle-clipper right">
-	              <div className="circle"></div>
-	            </div>
-	          </div>
-	        </div>
+          <Preloader />
         );
       }
 
@@ -32,11 +23,11 @@ export var RestaurantList = React.createClass({
     };
 
     return (
-      <div id="event-list">
+      <section id="restaurant-list" className="col s12 m10 offset-m1 l7 offset-l4">
         <h1 className="center">Best Beef in Vienna</h1>
         <p className="center">You should check these out!</p>
         {renderRestaurants()}
-      </div>
+      </section>
     )
   }
 });

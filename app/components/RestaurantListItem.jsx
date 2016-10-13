@@ -20,15 +20,15 @@ export var RestaurantListItem = React.createClass({
 	    return (
 		    <div className="card horizontal" id={id} onClick={this.onItemClick}>
 		      <div className="card-image">
-		        <img src={"https://loremflickr.com/200/350/steak,food,meat/all?random="+index} alt="" />
+		        <img src={"https://loremflickr.com/280/360/steak,food,meat/all?random="+index} alt="" />
 		      </div>
 		      <div className="card-stacked">
 		        <div className="card-content">
 		        	<h2>
-		        		<a href={`#/restaurant?r=&{id}`} className="card-title" title={`Open Details for {title}`}><span>{title}</span></a>
+		        		<a href={`#/restaurant?r=${id}`} className="card-title" title={`Open Details for {title}`}><span>{title}</span></a>
 		        	</h2>
 		        	<StarsRating avg={rating.avg} count={rating.count} />
-		        	<Tags categories={categories} address={address} userLat={userLat} userLng={userLng} priceLevel={priceLevel} />
+		        	<Tags categories={categories} priceLevel={priceLevel} />
 		        	<ul className="collection">
 					    <li className="collection-item">
 					    	<i className="material-icons">location_on</i>

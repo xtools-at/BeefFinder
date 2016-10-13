@@ -7,6 +7,7 @@ import Login from 'Login';
 import firebase from 'app/firebase/';
 
 import RestaurantList from 'RestaurantList';
+import RestaurantDetail from 'RestaurantDetail';
 
 var requireLogin = (nextState, replace, next) => {
   if (!firebase.auth().currentUser) {
@@ -30,7 +31,7 @@ export default (
       <IndexRoute component={RestaurantList}/>
       <Route path="login" component={Login} />
       <Route path="register" component={Login} />
-      <Route path="restaurant" component={Login} />
+      <Route path="restaurant" component={RestaurantDetail} />
     </Route>
   </Router>
 );

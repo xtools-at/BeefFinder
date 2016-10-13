@@ -36,7 +36,7 @@ export var Main = React.createClass({
         return (
            	<div className="row overall-container">
            		<Header />
-           		<main className="col s12 m10 offset-m1 l7 offset-l4">
+           		<main className="">
            			{this.props.children}
            		</main>
            		<div className="clearfix"></div>

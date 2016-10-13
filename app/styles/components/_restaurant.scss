@@ -1,4 +1,4 @@
-#event-list .card {
+#app .card {
 
 	.card-title.event-host {
 		font-size: 18px;
@@ -8,6 +8,21 @@
 	.card-image{
 		@media #{$small-and-down} {
 			display:none;
+		}
+		@media #{$medium-and-down} {
+			max-width:30%;
+		}
+
+		overflow:hidden;
+
+		img {
+		    height: 100%;
+		    max-width: 500%;
+
+
+			@media #{$medium-and-down} {
+				transform:translateX(-33%);
+			}
 		}
 	}
 	.chip .chip-icon {
@@ -30,12 +45,15 @@
 		.collection-item {
 			line-height: 2rem;
 			background-color: transparent;
-
-			i.material-icons{
-				float:left;
-				line-height:1.9rem;
-				padding-right:10px;
-			}
+		}
+		.collection-item>i.material-icons{
+			float:left;
+			line-height:1.9rem;
+			padding-right:10px;
+			color:$primary-color;
+		}
+		.collection-item>a{
+			margin-right:15px;
 		}
 
 		.collection-item:first-child {

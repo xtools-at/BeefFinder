@@ -2,11 +2,17 @@
 
 html, body, body>#app, body>#app>div {height:100%;}
 
+a {color:$primary-color;}
+
 .row.overall-container {
 	height: 100%;
 	margin-bottom:0;
   position:relative;
   overflow-x: hidden;
+}
+
+main {
+    min-height: calc(100vh - 134px) !important;
 }
 
  /*Nav,Header,Footer*/
@@ -23,22 +29,7 @@ nav .brand-logo {
 footer.page-footer {
 	margin-top:0;
 }
-  
 
-/*Maps*/
-
-#map-container {
-	position:relative;
-	height:calc(100% - 80px);
-}
-
-#map {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
- }
 
  /*Misc*/
 
