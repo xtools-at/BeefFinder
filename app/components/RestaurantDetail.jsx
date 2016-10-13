@@ -9,10 +9,10 @@ import TagDistance from 'TagDistance';
 
 export var RestaurantDetail = React.createClass({
   componentDidMount() {
-    $('#nav').addClass('hide');
+    $('#nav, .button-collapse').addClass('hide');
   },
   componentWillUnmount() {
-    $('#nav').removeClass('hide');
+    $('#nav, .button-collapse').removeClass('hide');
   },
 
   render() {
@@ -30,19 +30,20 @@ export var RestaurantDetail = React.createClass({
       //console.log('query-param',query);
 
       if (query && query.length > 0) {
+        var restaurantArray = [];
         //extract from restaurants-array in store
-        var queriedRestaurantArray = restaurants.map((restaurant, index)=>{
+        restaurants.map((restaurant, index)=>{
           //console.log('restaurant object',restaurant.id, query);
           if (restaurant.id == query){
             //console.log('hit restaurant object',restaurant.id, query);
-            return restaurant;
+            restaurantArray.push(restaurant);
           }
         });
 
-        var queriedRestaurant = queriedRestaurantArray[0];
+        var queriedRestaurant = restaurantArray[0];
 
         //get restaurant's values for big return
-        console.log('queried restaurant object', queriedRestaurant);
+        //console.log('queried restaurant object', queriedRestaurant, restaurantArray);
         var {id, title, tel, priceLevel, categories, address, hours, rating, description} = queriedRestaurant;
       } else {
         //no restaurant queried
