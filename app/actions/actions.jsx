@@ -246,9 +246,9 @@ export var getRatings = (ratings) => {
 export var startGetRatings = (restaurantId) => {
   return (dispatch) => {
 
-    var ratingsRef = dbRef.child('ratings/').orderByChild('reference').equalsTo(restaurantId);
+    var ratingsRef = dbRef.child('ratings/');
 
-    return ratingsRef.once('value').then((snapshot) => {
+    return ratingsRef.orderByChild('reference').equalTo(restaurantId).once('value').then((snapshot) => {
       var ratings = snapshot.val() || {};
       var parsedRatings = [];
 

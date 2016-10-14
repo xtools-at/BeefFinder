@@ -9,7 +9,7 @@ export var configure = (initialState = {}) => {
     auth: authReducer,
     storage: storageReducer,
     restaurants:  restaurantsReducer,
-    ratings: ratingsreducer
+    ratings: ratingsReducer
   });
 
   var store = redux.createStore(reducer, initialState, redux.compose(

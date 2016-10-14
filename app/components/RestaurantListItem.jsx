@@ -4,17 +4,11 @@ import moment from 'moment';
 
 import * as actions from 'actions';
 import StarsRating from 'StarsRating';
-import Tags from 'Tags';
 import TagDistance from 'TagDistance';
 import TagPrice from 'TagPrice';
 import TagCategories from 'TagCategories';
 
 export var RestaurantListItem = React.createClass({
-	onItemClick(){
-		var {dispatch, id} = this.props;
-		dispatch(actions.setActiveEvent(id));
-	},
-
 	render() {
 
 	  	var {id, title, tel, priceLevel, categories, address, hours, rating, userLat, userLng, index} = this.props;
@@ -29,7 +23,7 @@ export var RestaurantListItem = React.createClass({
 		        	<h2>
 		        		<a href={`#/restaurant?r=${id}`} className="card-title" title={`Open Details for {title}`}><span>{title}</span></a>
 		        	</h2>
-		        	<div>
+		        	<div className="stars-rating">
 	                  <StarsRating avg={rating.avg}/>
 	                  <span className="chip"><i className="material-icons chip-icon">supervisor_account</i>{rating.count}</span>
 	                </div>
@@ -40,7 +34,7 @@ export var RestaurantListItem = React.createClass({
 		        	<ul className="collection">
 					    <li className="collection-item">
 					    	<i className="material-icons">location_on</i>
-					    	<a href={`https://www.google.com/maps?q=${address.lat},${address.lng}`} target="_blank" title={`View ${title} on GoogleMaps`}>{address.street}, {address.zip}</a>
+					    	<a href={`https://www.google.com/maps?q=${encodeURIComponent(title)}&near=${address.lat},${address.lng}`} target="_blank" title={`View ${title} on GoogleMaps`}>{address.street}, {address.zip}</a>
 					    	<TagDistance address={address} userLat={userLat} userLng={userLng} />
 					    </li>
 					    <li className="collection-item">

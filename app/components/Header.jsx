@@ -51,8 +51,8 @@ export var Header = React.createClass({
          	<nav>
 			    <div className="nav-wrapper">
 		      	<a href="#/" className="brand-logo"><i className="material-icons">restaurant</i>BeefFinder</a>
-		      	<a data-activates="nav" className="button-collapse" tabindex="-1"><i className="material-icons">menu</i><span className="sr-only">Toggle Menu</span></a>
-            <a className="nav-back left hide" onClick={()=>{window.history.go(-1)}}><i className="material-icons">keyboard_arrow_left</i><span className="sr-only">Go Back</span></a>
+		      	<a data-activates="nav" className="button-collapse" tabIndex="-1"><i className="material-icons">menu</i><span className="sr-only">Toggle Menu</span></a>
+            <a className="nav-back left hide hide-on-large-only" onClick={()=>{window.history.go(-1)}}><i className="material-icons">keyboard_arrow_left</i><span className="sr-only">Go Back</span></a>
 				  		<ul className="right">
 				        	<li><a className="waves-effect" title="Fork on Github" href="https://github.com/xtools-at/BeefFinder" target="_blank">
 				        		<i className="material-icons left">code</i>

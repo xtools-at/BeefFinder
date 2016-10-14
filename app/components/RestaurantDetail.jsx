@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
-import actions from 'actions';
+import * as actions from 'actions';
 
 import Preloader from 'Preloader';
 import StarsRating from 'StarsRating';
@@ -18,6 +18,7 @@ export var RestaurantDetail = React.createClass({
     //get Ratings
     var {dispatch} = this.props;
     var query = this.props.location.query.r;
+    console.log('debug',query);
     if (query && query.length > 0) {
       dispatch(actions.startGetRatings(query));
     }
@@ -26,7 +27,6 @@ export var RestaurantDetail = React.createClass({
     $('h1').focus();
     $('#nav, .button-collapse').addClass('hide');
     $('.nav-back').removeClass('hide');
-
   },
   componentWillUnmount() {
 
@@ -83,10 +83,10 @@ export var RestaurantDetail = React.createClass({
             </div>
             <div className="card-stacked">
               <div className="card-content">
-                <h1 tabindex="-1">
+                <h1 tabIndex="-1">
                  <span>{title}</span>
                 </h1>
-                <div>
+                <div className="stars-rating">
                   <StarsRating avg={rating.avg}/>
                   <span className="chip"><i className="material-icons chip-icon">supervisor_account</i>{rating.count}</span>
                 </div>
@@ -109,10 +109,10 @@ export var RestaurantDetail = React.createClass({
               </div>
             </div>
           </div>
-          <div className="card horizontal">
+          <div className="card-panel">
             <RatingsHeader avg={rating.avg} count={rating.count} />
-            <RatingsList />
           </div>
+          <RatingsList />
         </section>
       );
     };

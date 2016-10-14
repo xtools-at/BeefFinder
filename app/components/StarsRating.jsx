@@ -34,7 +34,7 @@ export var StarsRating = React.createClass({
 		}
 
 	    return (
-		    <div className="valign-wrapper">
+		    <div className="valign-wrapper left">
 		    	{showStars()}
 		    </div>
 	    )

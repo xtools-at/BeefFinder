@@ -113,7 +113,6 @@ export var ratingsReducer = (state = [], action) => {
       ];
     case 'GET_RATINGS':
       return [
-        ...state,
         ...action.ratings
       ];
     case 'CLEAR_RATINGS':

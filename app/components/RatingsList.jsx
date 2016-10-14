@@ -23,8 +23,7 @@ export var RatingsList = React.createClass({
     };
 
     return (
-      <section id="ratings-list" className="col s12 m10 offset-m1 l7 offset-l4">
-        <h2 className="center">How was it?</h2>
+      <section id="ratings-list" className="">
         {renderRatings()}
       </section>
     )
