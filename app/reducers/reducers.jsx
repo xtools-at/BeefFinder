@@ -99,8 +99,25 @@ export var restaurantsReducer = (state = [], action) => {
         ...state,
         ...action.restaurants
       ];
-    case 'LOGOUT':
-      return [...state];
+    default:
+      return state;
+  }
+};
+
+export var ratingsReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_RATING':
+      return [
+        ...state,
+        action.rating
+      ];
+    case 'GET_RATINGS':
+      return [
+        ...state,
+        ...action.ratings
+      ];
+    case 'CLEAR_RATINGS':
+      return [];
     default:
       return state;
   }

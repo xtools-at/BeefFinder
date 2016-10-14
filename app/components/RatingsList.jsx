@@ -1,32 +1,31 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
-import RestaurantListItem from 'RestaurantListItem';
+import RatingsListItem from 'RatingsListItem';
 import Preloader from 'Preloader';
 
-export var RestaurantList = React.createClass({
+export var RatingsList = React.createClass({
   render() {
-    var {restaurants, storage} = this.props;
-    var renderRestaurants = () => {
+    var {ratings} = this.props;
+    var renderRatings = () => {
 
-      if (restaurants.length === 0) {
+      if (ratings.length === 0) {
         return (
           <Preloader />
         );
       }
 
-      return restaurants.map((restaurant, index) => {
+      return ratings.map((rating, index) => {
         return (
-          <RestaurantListItem key={index} index={index} userLat={storage.userLat} userLng={storage.userLng} {...restaurant}/>
+          <RatingsListItem key={index} index={index} {...rating}/>
         );
       });
     };
 
     return (
-      <section id="restaurant-list" className="col s12 m10 offset-m1 l7 offset-l4">
-        <h1 className="center">Best Beef in Vienna</h1>
-        <p className="center">You should check these out!</p>
-        {renderRestaurants()}
+      <section id="ratings-list" className="col s12 m10 offset-m1 l7 offset-l4">
+        <h2 className="center">How was it?</h2>
+        {renderRatings()}
       </section>
     )
   }
@@ -35,8 +34,7 @@ export var RestaurantList = React.createClass({
 export default Redux.connect(
   (state) => {
     return {
-      restaurants: state.restaurants,
-      storage: state.storage
+      ratings : state.ratings
     };
   }
-)(RestaurantList);
+)(RatingsList);

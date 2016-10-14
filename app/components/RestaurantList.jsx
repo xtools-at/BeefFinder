@@ -5,6 +5,9 @@ import RestaurantListItem from 'RestaurantListItem';
 import Preloader from 'Preloader';
 
 export var RestaurantList = React.createClass({
+  componentDidMount() {
+      $('h1').focus();  
+  },
   render() {
     var {restaurants, storage} = this.props;
     var renderRestaurants = () => {
@@ -24,7 +27,7 @@ export var RestaurantList = React.createClass({
 
     return (
       <section id="restaurant-list" className="col s12 m10 offset-m1 l7 offset-l4">
-        <h1 className="center">Best Beef in Vienna</h1>
+        <h1 className="center" tabindex="-1">Best Beef in Vienna</h1>
         <p className="center">You should check these out!</p>
         {renderRestaurants()}
       </section>

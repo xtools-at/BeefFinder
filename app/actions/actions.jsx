@@ -229,10 +229,43 @@ export var startGetRestaurants = () => {
           ...restaurants[restaurantId]
         });
       });
-
       //console.log('debug', restaurants, parsedRestaurants);
-
       dispatch(getRestaurants(parsedRestaurants));
     });
+  };
+};
+
+
+export var getRatings = (ratings) => {
+  return {
+    type: 'GET_RATINGS',
+    ratings
+  };
+};
+
+export var startGetRatings = (restaurantId) => {
+  return (dispatch) => {
+
+    var ratingsRef = dbRef.child('ratings/').orderByChild('reference').equalsTo(restaurantId);
+
+    return ratingsRef.once('value').then((snapshot) => {
+      var ratings = snapshot.val() || {};
+      var parsedRatings = [];
+
+      Object.keys(ratings).forEach((ratingId) => {
+        parsedRatings.push({
+          id: ratingId,
+          ...ratings[ratingId]
+        });
+      });
+
+      dispatch(getRatings(parsedRatings));
+    });
+  };
+};
+
+export var clearRatings = () => {
+  return {
+    type: 'CLEAR_RATINGS'
   };
 };

@@ -6,6 +6,8 @@ import * as actions from 'actions';
 import StarsRating from 'StarsRating';
 import Tags from 'Tags';
 import TagDistance from 'TagDistance';
+import TagPrice from 'TagPrice';
+import TagCategories from 'TagCategories';
 
 export var RestaurantListItem = React.createClass({
 	onItemClick(){
@@ -27,8 +29,14 @@ export var RestaurantListItem = React.createClass({
 		        	<h2>
 		        		<a href={`#/restaurant?r=${id}`} className="card-title" title={`Open Details for {title}`}><span>{title}</span></a>
 		        	</h2>
-		        	<StarsRating avg={rating.avg} count={rating.count} />
-		        	<Tags categories={categories} priceLevel={priceLevel} />
+		        	<div>
+	                  <StarsRating avg={rating.avg}/>
+	                  <span className="chip"><i className="material-icons chip-icon">supervisor_account</i>{rating.count}</span>
+	                </div>
+		        	<div className="">
+	                  <TagCategories categories={categories} />
+	                  <TagPrice priceLevel={priceLevel} />
+	                </div>
 		        	<ul className="collection">
 					    <li className="collection-item">
 					    	<i className="material-icons">location_on</i>

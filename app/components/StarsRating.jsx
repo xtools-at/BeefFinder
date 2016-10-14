@@ -34,9 +34,8 @@ export var StarsRating = React.createClass({
 		}
 
 	    return (
-		    <div className="valign-wrapper stars-rating">
+		    <div className="valign-wrapper">
 		    	{showStars()}
-		    	<span className="chip"><i className="material-icons chip-icon">supervisor_account</i> {count}</span>
 		    </div>
 	    )
 	}

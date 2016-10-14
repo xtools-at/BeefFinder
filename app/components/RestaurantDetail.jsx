@@ -1,9 +1,12 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
+import actions from 'actions';
+
 import Preloader from 'Preloader';
 import StarsRating from 'StarsRating';
-import Tags from 'Tags';
+import TagPrice from 'TagPrice';
+import TagCategories from 'TagCategories';
 import TagDistance from 'TagDistance';
 import RatingsHeader from 'RatingsHeader';
 import RatingsList from 'RatingsList';
@@ -11,10 +14,27 @@ import RatingsList from 'RatingsList';
 
 export var RestaurantDetail = React.createClass({
   componentDidMount() {
+
+    //get Ratings
+    var {dispatch} = this.props;
+    var query = this.props.location.query.r;
+    if (query && query.length > 0) {
+      dispatch(actions.startGetRatings(query));
+    }
+
+
+    $('h1').focus();
     $('#nav, .button-collapse').addClass('hide');
+    $('.nav-back').removeClass('hide');
+
   },
   componentWillUnmount() {
+
+    var {dispatch} = this.props;
+    dispatch(actions.clearRatings());
+
     $('#nav, .button-collapse').removeClass('hide');
+    $('.nav-back').addClass('hide');
   },
 
   render() {
@@ -27,7 +47,7 @@ export var RestaurantDetail = React.createClass({
         );
       }
 
-      //get restaurant from id in query
+      //get restaurant from id in query [url?r=ID]
       var query = this.props.location.query.r;
       //console.log('query-param',query);
 
@@ -63,15 +83,21 @@ export var RestaurantDetail = React.createClass({
             </div>
             <div className="card-stacked">
               <div className="card-content">
-                <h1>
+                <h1 tabindex="-1">
                  <span>{title}</span>
                 </h1>
-                <StarsRating avg={rating.avg} count={rating.count} />
-                <Tags categories={categories} priceLevel={priceLevel} />
+                <div>
+                  <StarsRating avg={rating.avg}/>
+                  <span className="chip"><i className="material-icons chip-icon">supervisor_account</i>{rating.count}</span>
+                </div>
+                <div className="">
+                  <TagCategories categories={categories} />
+                  <TagPrice priceLevel={priceLevel} />
+                </div>
                 <ul className="collection">
                 <li className="collection-item">
                   <i className="material-icons">location_on</i>
-                  <a href={`https://www.google.com/maps?q=${address.lat},${address.lng}`} target="_blank" title={`View ${title} on GoogleMaps`}>{address.street}, {address.zip}</a>
+                  <a href={`https://www.google.com/maps?q=${encodeURIComponent(title)}&near=${address.lat},${address.lng}`} target="_blank" title={`View ${title} on GoogleMaps`}>{address.street}, {address.zip}</a>
                   <TagDistance address={address} userLat={storage.userLat} userLng={storage.userLng} />
                 </li>
                 <li className="collection-item">
