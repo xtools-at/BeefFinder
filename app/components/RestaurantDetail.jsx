@@ -5,6 +5,8 @@ import Preloader from 'Preloader';
 import StarsRating from 'StarsRating';
 import Tags from 'Tags';
 import TagDistance from 'TagDistance';
+import RatingsHeader from 'RatingsHeader';
+import RatingsList from 'RatingsList';
 
 
 export var RestaurantDetail = React.createClass({
@@ -82,7 +84,8 @@ export var RestaurantDetail = React.createClass({
             </div>
           </div>
           <div className="card horizontal">
-            Ratings
+            <RatingsHeader avg={rating.avg} count={rating.count} />
+            <RatingsList />
           </div>
         </section>
       );
