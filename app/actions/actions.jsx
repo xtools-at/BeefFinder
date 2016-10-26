@@ -269,3 +269,40 @@ export var clearRatings = () => {
     type: 'CLEAR_RATINGS'
   };
 };
+
+export var showModal = (setTo) => {
+  return {
+    type: 'SHOW_MODAL',
+    showModal: setTo
+  }
+}
+
+export var addReview = (rating) => {
+  return {
+    type: 'ADD_RATING',
+    rating
+  };
+};
+
+export var startAddReview = (rating, name, comment, reference, date) => {
+  return (dispatch, getState) => {
+    var review = {
+      rating, name, comment, reference, date
+    };
+    
+    var reviewSave = dbRef.child('ratings').push(review);
+    return reviewSave.then(() => {
+      dispatch(addReview(review));
+      Helper.toast('Review has been saved succesfully!');
+    }).catch((error)=>{
+      Helper.toast('Unable to save Review - please try again!');
+    });
+  };
+};
+
+export var setCheckedRadio = (checkedRadio) => {
+  return {
+    type: 'CHECKED_RADIO',
+    checkedRadio
+  };
+};

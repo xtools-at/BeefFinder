@@ -11,7 +11,7 @@ export var RatingsList = React.createClass({
 
       if (ratings.length === 0) {
         return (
-          <Preloader />
+          <Preloader additionalClass={"vertical"} />
         );
       }
 

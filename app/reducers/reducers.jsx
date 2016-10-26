@@ -36,7 +36,9 @@ export var storageReducer = (state = {
   userLat: '',
   userLng: '',
   activeEvent: '',
-  toggleMap: false
+  toggleMap: false,
+  showModal: false,
+  checkedRadio: 0
   }, action) => {
   switch (action.type) {
     case 'STORE_LOCATION':
@@ -65,6 +67,16 @@ export var storageReducer = (state = {
       return {
         ...state,
         toggleMap: action.toggleMap
+      };
+    case 'SHOW_MODAL':
+      return {
+        ...state,
+        showModal: action.showModal
+      };
+    case 'CHECKED_RADIO':
+      return {
+        ...state,
+        checkedRadio: action.checkedRadio
       };
     case 'LOGOUT':
       return {

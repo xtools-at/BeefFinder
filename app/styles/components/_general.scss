@@ -43,8 +43,15 @@ footer.page-footer {
 	margin-bottom:15px;
 }
 
+.preloader-container{overflow: hidden;}
+
 .preloader-wrapper.big {
   margin: calc(50% - 32px);
+}
+
+.preloader-wrapper.big.vertical {
+  margin-top:20px;
+  margin-bottom:20px;
 }
 
 

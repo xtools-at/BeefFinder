@@ -45,3 +45,12 @@ onSearch: function (e) {
   //get scroll to bottom
       window.addEventListener('scroll', this.handleScroll);
       console.log('attached event listener onscroll');
+
+
+
+
+      jQuery('.sw-trigger').on(evClKd, function(ev) {
+        if (ev.which == '13' || ev.which == '32' || ev.type == 'click') {
+            easyswitch.call(this, '');
+        }
+    });

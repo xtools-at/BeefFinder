@@ -30,6 +30,15 @@ export var Main = React.createClass({
 	        }
 	      }
    		});
+
+    	var tabUsed = false;
+   		$('body').on('keydown', function(ev) {
+	        if (!tabUsed && ev.which == '9') {
+	        	//tab was used
+	            tabUsed = true;
+	            $('body').addClass('keyboard');
+	        }
+    	});
 	},
 	
     render() {

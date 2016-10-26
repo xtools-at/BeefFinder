@@ -1,0 +1,11 @@
+.modal.bottom-sheet.open {
+	z-index: 1003; display: block; opacity: 1; bottom: 0px;
+}
+
+.lean-overlay.open {
+	z-index: 1002; display: block; opacity: 0.5;
+}
+
+body.keyboard .btn-flat:focus {
+	outline: 1px solid blue;
+}
