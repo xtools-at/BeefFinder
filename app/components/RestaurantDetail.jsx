@@ -79,7 +79,7 @@ export var RestaurantDetail = React.createClass({
         <section id="restaurant-detail" className="col s12 m10 offset-m1 l10 offset-l1">
           <div className="card horizontal" id={id}>
             <div className="card-image">
-              <img src="https://loremflickr.com/360/250/steak,food,meat/all" alt="" />
+              <img src={`https://loremflickr.com/360/250/steak,food,meat/all?img=${id}`} alt="" />
             </div>
             <div className="card-stacked">
               <div className="card-content">

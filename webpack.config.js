@@ -44,10 +44,12 @@ module.exports = {
       {
         cacheId: 'App',
         filename: './public/service-worker.js',
+        maximumFileSizeToCacheInBytes: 8388608,
         staticFileGlobs: [
           'public/**.{html, js, json, xml, ico}',
           'public/images/**.*',
-          'public/icons/**.*'
+          'public/icons/**.*',
+          'public/bundle.js'
         ],
         stripPrefix: 'public/',
         verbose: true,
@@ -62,6 +64,9 @@ module.exports = {
         }, {
           urlPattern: /firebaseio\.com/,
           handler: 'fastest'
+        }, {
+          urlPattern: /^https:\/\/loremflickr\.com/,
+          handler: 'cacheFirst'
         }/*, {
           urlPattern: /\/articles\//,
           handler: 'fastest',
