@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var envFile = require('node-env-file');
+var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -38,7 +39,40 @@ module.exports = {
         GITHUB_ACCESS_TOKEN: JSON.stringify(process.env.GITHUB_ACCESS_TOKEN),
         MAPS_API_KEY: JSON.stringify(process.env.MAPS_API_KEY),
       }
-    })
+    }),
+    new SWPrecacheWebpackPlugin(
+      {
+        cacheId: 'App',
+        filename: './public/service-worker.js',
+        staticFileGlobs: [
+          'public/**.{html, js, json, xml, ico}',
+          'public/images/**.*',
+          'public/icons/**.*'
+        ],
+        stripPrefix: 'public/',
+        verbose: true,
+        navigateFallback: 'index.html',
+
+        runtimeCaching: [{
+          urlPattern: /^https:\/\/fonts\.googleapis\.com/,
+          handler: 'cacheFirst' /*can be: networkFirst,cacheFirstfastest,cacheOnly,networkOnly*/
+        }, {
+          urlPattern: /^https:\/\/ipinfo\.io/,
+          handler: 'networkFirst'
+        }, {
+          urlPattern: /firebaseio\.com/,
+          handler: 'fastest'
+        }/*, {
+          urlPattern: /\/articles\//,
+          handler: 'fastest',
+          options: {
+              cache: {
+                maxEntries: 10,
+                name: 'articles-cache'
+              }
+          }
+        }*/]
+      })
   ],
   output: {
     path: __dirname,

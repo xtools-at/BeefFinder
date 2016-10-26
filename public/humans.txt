@@ -8,6 +8,7 @@
 
     Rob Perceival
     Andrew Mead
+    Stephen Grider
     Udacity
 
 # TECHNOLOGY COLOPHON

@@ -13,7 +13,7 @@ export var RatingsListItem = React.createClass({
 	    return (
 
 		    <div className="card-panel" id={id}>
-	          <div className="row valign-wrapper">
+	          <div className="valign-wrapper">
 	            <div className="col s3 m2">
 	              <img src={`https://loremflickr.com/200/200/person,face/all?random=${index}`} alt="" className="circle responsive-img" />
 	            </div>

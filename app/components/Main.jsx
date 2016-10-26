@@ -12,7 +12,7 @@ export var Main = React.createClass({
 	componentDidMount() {
 		//fetch user location
 		var {dispatch} = this.props;
-    	var coords = axios.get('http://ipinfo.io').then((res) => {
+    	var coords = axios.get('https://ipinfo.io').then((res) => {
     	  //console.log(res.data);
 	      if (res.data.loc){
 	        try{
