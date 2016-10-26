@@ -13,22 +13,22 @@ export var RatingsListItem = React.createClass({
 	    return (
 
 		    <div className="card-panel" id={id}>
-	          <div className="valign-wrapper">
-	            <div className="col s3 m2">
+	          <div className="">
+	            <div className="col s3 m2 valign-wrapper">
 	              <img src={`https://loremflickr.com/200/200/person,face/all?random=${index}`} alt="" className="circle responsive-img" />
 	            </div>
 	            <div className="col s9 m10">
-	              <span className="black-text">
-	                {name}
-	              </span>
-	              <span className="grey-text">
+	            	<StarsRating avg={rating} />
+	              <p className="black-text clearfix">
+	                {name} <span className="grey-text">
 	                {moment(date).format('@ D.MMM.\'YY')}
-	              </span>
-	              <StarsRating avg={rating} />
-	              <span className="black-text">
+	              	</span>
+	              </p>
+	              <p className="black-text">
 	                {comment}
-	              </span>
+	              </p>
 	            </div>
+	            <div className="clearfix"></div>
 	          </div>
 	        </div>
 	    )
