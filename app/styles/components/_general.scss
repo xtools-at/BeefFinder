@@ -19,7 +19,15 @@ main {
  /*Nav,Header,Footer*/
 
 .side-nav{
-  padding-bottom: 35px;
+  padding-bottom: 15px;
+
+  @media #{$large-and-up} {
+    padding-bottom: 0;
+  }
+
+  a {
+    padding: 0 16px;
+  }
  .a {
     color: $primary-text-color;
     display: block;
