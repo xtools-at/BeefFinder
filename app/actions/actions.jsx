@@ -45,19 +45,6 @@ export var startRegister = (email, encryptedPassword, username) => {
   };
 };
 
-/*
-export var saveUsername = (username) => {
-  var user = firebase.auth().currentUser;
-  user.updateProfile({
-    displayName: username,
-  }).then(function() {
-    console.log('saved displayName to DB');
-  }, function(error) {
-    console.log('Error saving displayName to DB', error);
-  });
-}
-*/
-
 export var startLogin = (email, encryptedPassword) => {
   return (dispatch, getState) => {
     return firebase.auth().signInWithEmailAndPassword(email, encryptedPassword).then(
@@ -85,53 +72,7 @@ export var startLogout = () => {
 };
 
 
-//Store custom Data
-export var storeLocation = (lat, lng) => {
-  return {
-    type: 'STORE_LOCATION',
-    userLat: lat,
-    userLng: lng
-  };
-};
 
-export var setActiveEvent = (eventId) => {
-  return {
-    type: 'SET_ACTIVE_EVENT',
-    activeEvent: eventId
-  }
-}
-
-export var toggleMap = () => {
-  return {
-    type: 'TOGGLE_MAP'
-  }
-}
-
-export var setToggleMap = (setTo) => {
-  return {
-    type: 'SET_TOGGLE_MAP',
-    toggleMap: setTo
-  }
-}
-
-/*
-export var fetchIpLocation = () => {
-  return (dispatch, getState) => {
-    var coords = axios.get('http://ipinfo.io');
-    return coords.then((res) => {
-      if (res.data.loc){
-        try{
-          var latLngArray = res.data.loc.split(',');
-
-          dispatch(storeLocation(latLngArray[0],latLngArray[1]));
-        } catch (e){
-          console.log(e);
-        }
-      }
-    });
-  };
-}
-*/
 
 //Add Events
 export var addEvent = (event) => {
@@ -206,7 +147,7 @@ export var toggleAdditionalFields = () => {
 
 //####################################################
 
-
+//Get Restaurant List
 export var getRestaurants = (restaurants) => {
   return {
     type: 'GET_RESTAURANTS',
@@ -229,13 +170,12 @@ export var startGetRestaurants = () => {
           ...restaurants[restaurantId]
         });
       });
-      //console.log('debug', restaurants, parsedRestaurants);
       dispatch(getRestaurants(parsedRestaurants));
     });
   };
 };
 
-
+//Handle Ratings
 export var getRatings = (ratings) => {
   return {
     type: 'GET_RATINGS',
@@ -270,13 +210,8 @@ export var clearRatings = () => {
   };
 };
 
-export var showModal = (setTo) => {
-  return {
-    type: 'SHOW_MODAL',
-    showModal: setTo
-  }
-}
 
+//Add Review
 export var addReview = (rating) => {
   return {
     type: 'ADD_RATING',
@@ -300,9 +235,36 @@ export var startAddReview = (rating, name, comment, reference, date) => {
   };
 };
 
+//Store custom Data
 export var setCheckedRadio = (checkedRadio) => {
   return {
     type: 'CHECKED_RADIO',
     checkedRadio
   };
 };
+
+export var storeLocation = (lat, lng) => {
+  return {
+    type: 'STORE_LOCATION',
+    userLat: lat,
+    userLng: lng
+  };
+};
+
+export var showModal = (setTo) => {
+  return {
+    type: 'SHOW_MODAL',
+    showModal: setTo
+  }
+}
+
+//Filters
+export var setFilters = (filters, sortBy) => {
+  //filters = {id: bool, id2: bool2}
+  //sortBy = "string"
+  return {
+    type: 'SET_FILTERS',
+    filters,
+    sortBy
+  }
+}

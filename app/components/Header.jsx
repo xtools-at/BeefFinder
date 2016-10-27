@@ -26,7 +26,36 @@ export var Header = React.createClass({
   		$(".button-collapse").sideNav('hide');
   	},
 
+    filtersChanged(ev){
+
+      //do not fiddle with select-box
+      var $t = $(ev.target);
+      if ($t.is('input[type="checkbox"]')){
+        $t.attr('checked','false');
+      }
+      
+      var {dispatch} = this.props;
+
+      var sortingString = $('#select-sorting').val();
+      var filtersObj = {};
+      
+      $('#nav input[type="checkbox"]').each(function(){
+        var key = $(this).attr('id');
+        var val = $(this).is(':checked');
+
+        filtersObj[key] = val;
+      });
+
+      //console.log(sortingString, filtersObj);
+
+      dispatch(actions.setFilters(filtersObj, sortingString));
+    },
+
     render() {
+      var { filters, sortBy } = this.props.filter;
+
+      //console.log('props',this.props.filter);
+      //console.log('filters',filters);
 
       return (
         <header className="navbar-fixed">
@@ -50,13 +79,13 @@ export var Header = React.createClass({
 							     </div>
                 </li>
                 <li className="">
-                  <label htmlFor="select-sorting" className="subheader a"><i className="material-icons left">sort</i>Sort Restaurants</label>
-                  <select id="select-sorting" className="browser-default a waves-effect" defaultValue="1">
-                    <option value="1">Best Rated</option>
-                    <option value="2">Most Rated</option>
-                    <option value="3">Cheapest</option>
-                    <option value="4">Most Expensive</option>
-                    <option value="5">Secret Algorithm</option>
+                  <label htmlFor="select-sorting" className="subheader a"><i className="material-icons left">sort</i>Sort Restaurants by</label>
+                  <select id="select-sorting" className="browser-default a waves-effect" defaultValue={sortBy} onChange={this.filtersChanged}>
+                    <option value="BEST">Best Rated</option>
+                    <option value="MOST">Most Rated</option>
+                    <option value="PRICE_ASC">Cheapest</option>
+                    <option value="PRICE_DESC">Most Expensive</option>
+                    <option value="ALGO">Secret Algorithm</option>
                   </select>
                 </li>
                 <li><div className="divider"></div></li>
@@ -64,22 +93,22 @@ export var Header = React.createClass({
                   <h3 className="subheader a"><i className="material-icons left">filter_list</i>Filter Restaurants by Category</h3>
                   <div className="clearfix"></div>
                   <div className="switch waves-effect">
-                    <label htmlFor="switch-steak">
-                      <input id="switch-steak" type="checkbox"></input>
+                    <label htmlFor="switch_steak">
+                      <input id="switch_steak" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_steak}></input>
                       <span className="lever"></span>
                       Steak
                     </label>
                   </div>
                   <div className="switch waves-effect">
-                    <label htmlFor="switch-burgers">
-                      <input id="switch-burgers" type="checkbox"></input>
+                    <label htmlFor="switch_burgers">
+                      <input id="switch_burgers" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_burgers}></input>
                       <span className="lever"></span>
                       Burgers
                     </label>
                   </div>
                   <div className="switch waves-effect">
-                    <label htmlFor="switch-grill">
-                      <input id="switch-grill" type="checkbox"></input>
+                    <label htmlFor="switch_grill">
+                      <input id="switch_grill" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_grill}></input>
                       <span className="lever"></span>
                       Grill
                     </label>
@@ -90,22 +119,22 @@ export var Header = React.createClass({
                   <h3 className="subheader a"><i className="material-icons left">euro_symbol</i>Filter Restaurants by Price</h3>
                   <div className="clearfix"></div>
                   <div className="switch waves-effect">
-                    <label htmlFor="switch-price1">
-                      <input id="switch-price1" type="checkbox"></input>
+                    <label htmlFor="switch_price1">
+                      <input id="switch_price1" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_price1}></input>
                       <span className="lever"></span>
                       Cheap
                     </label>
                   </div>
                   <div className="switch waves-effect">
-                    <label htmlFor="switch-price2">
-                      <input id="switch-price2" type="checkbox"></input>
+                    <label htmlFor="switch_price2">
+                      <input id="switch_price2" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_price2}></input>
                       <span className="lever"></span>
                       Moderate
                     </label>
                   </div>
                   <div className="switch waves-effect">
-                    <label htmlFor="switch-price3">
-                      <input id="switch-price3" type="checkbox"></input>
+                    <label htmlFor="switch_price3">
+                      <input id="switch_price3" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_price3}></input>
                       <span className="lever"></span>
                       Expensive
                     </label>
