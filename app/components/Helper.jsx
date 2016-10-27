@@ -16,3 +16,33 @@ export default {
 		});
 	}
 };
+
+export var Filter = {
+  filter: function (restaurants, showCompleted, searchText) {
+    var filteredRestaurants = restaurants;
+
+    // Filter by showCompleted
+    filteredRestaurants = filteredRestaurants.filter((restaurant) => {
+      return !restaurant.completed || showCompleted;
+    });
+
+    // Filter by searchText
+    filteredRestaurants = filteredRestaurants.filter((restaurant) => {
+      var text = restaurant.text.toLowerCase();
+      return searchText.length === 0 || text.indexOf(searchText) > -1;
+    });
+
+    // Sort restaurants with non-completed first
+    filteredRestaurants.sort((a, b) => {
+      if (!a.completed && b.completed) {
+        return -1;
+      } else if (a.completed && !b.completed) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    return filteredRestaurants;
+  }
+};

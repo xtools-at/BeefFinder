@@ -44,6 +44,13 @@ export var RatingsHeader = React.createClass({
       this.showAddReview(false);
 
     } else {
+    	$('input.validate').each(function(i, el){
+        if (el.checkValidity()){
+          $(el).addClass('valid').removeClass('invalid');
+        } else {
+          $(el).addClass('invalid').removeClass('valid');
+        }
+      });
       Helper.toast('Something is wrong up there, please check your Input!');
     }
 	},
@@ -100,7 +107,11 @@ export var RatingsHeader = React.createClass({
 							<div className="modal-content">
 								<h4 tabIndex="-1">Add Review</h4>
 								 
-								<div className="">
+								<div id="stars" className="col s12">
+									<label className="" htmlFor="stars">Your Rating</label>
+									<div className="valign-wrapper">
+										<i className="material-icons" style={{marginRight: '10px'}}>star_border</i>
+
 									  <input name="stars" type="radio" id="star1" value="1" onChange={this.radioChecked} required className="validate" />
       							<label className="sr-only" htmlFor="star1" data-error="Please choose a Rating">1 Star</label>
 
@@ -115,6 +126,9 @@ export var RatingsHeader = React.createClass({
 
       							<input name="stars" type="radio" id="star5" value="5" onChange={this.radioChecked} />
       							<label className="sr-only" htmlFor="star5">5 Stars</label>
+
+      							<i className="material-icons">star</i>
+      						</div>
 								</div>
 
 
@@ -128,9 +142,9 @@ export var RatingsHeader = React.createClass({
 				              name="name" 
 				              autoComplete="name"
 				              autoFocus="true" 
-				              pattern="^.{3,}$"
+				              pattern="^.{2,}$"
 				              required/>
-				          <label htmlFor="review_name" className="active" data-error="Please enter at least 3 Characters">Your Name</label>
+				          <label htmlFor="review_name" className="active" data-error="Please enter at least 2 Characters">Your Name</label>
 				        </div>
 
 			          <div className="input-field col s12">
