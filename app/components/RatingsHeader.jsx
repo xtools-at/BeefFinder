@@ -87,7 +87,7 @@ export var RatingsHeader = React.createClass({
 			return parsedRatings.map((rating, index) => {
 				return (
 					<div className="rating-bar-container" key={index}>
-		    			<span className="bar-label"><i className="material-icons">star</i>{rating.num}</span>
+		    			<span className="bar-label valign-wrapper"><i className="material-icons">star</i>{rating.num}</span>
 		    			<span className={`bar r${rating.num}`} style={rating.width}></span>
 		    			<span className="bar-number" aria-label={`${rating.count} ${rating.num}-star ratings`}>{rating.count}</span>
 			    	</div>
@@ -112,23 +112,23 @@ export var RatingsHeader = React.createClass({
 									<div className="valign-wrapper">
 										<i className="material-icons" style={{marginRight: '10px'}}>star_border</i>
 
-									  <input name="stars" type="radio" id="star1" value="1" onChange={this.radioChecked} required className="validate" />
-      							<label className="sr-only" htmlFor="star1" data-error="Please choose a Rating">1 Star</label>
+										<input name="stars" type="radio" id="star1" value="1" onChange={this.radioChecked} required autoFocus="true" className="validate" />
+		      							<label className="sr-only" htmlFor="star1" data-error="Please choose a Rating">1 Star</label>
 
-      							<input name="stars" type="radio" id="star2" value="2" onChange={this.radioChecked} />
-      							<label className="sr-only" htmlFor="star2">2 Stars</label>
+		      							<input name="stars" type="radio" id="star2" value="2" onChange={this.radioChecked} />
+		      							<label className="sr-only" htmlFor="star2">2 Stars</label>
 
-      							<input name="stars" type="radio" id="star3" value="3" onChange={this.radioChecked} />
-      							<label className="sr-only" htmlFor="star3">3 Stars</label>
+		      							<input name="stars" type="radio" id="star3" value="3" onChange={this.radioChecked} />
+		      							<label className="sr-only" htmlFor="star3">3 Stars</label>
 
-      							<input name="stars" type="radio" id="star4" value="4" onChange={this.radioChecked} />
-      							<label className="sr-only" htmlFor="star4">4 Stars</label>
+		      							<input name="stars" type="radio" id="star4" value="4" onChange={this.radioChecked} />
+		      							<label className="sr-only" htmlFor="star4">4 Stars</label>
 
-      							<input name="stars" type="radio" id="star5" value="5" onChange={this.radioChecked} />
-      							<label className="sr-only" htmlFor="star5">5 Stars</label>
+		      							<input name="stars" type="radio" id="star5" value="5" onChange={this.radioChecked} />
+		      							<label className="sr-only" htmlFor="star5">5 Stars</label>
 
-      							<i className="material-icons">star</i>
-      						</div>
+		      							<i className="material-icons">star</i>
+		      						</div>
 								</div>
 
 
@@ -141,7 +141,6 @@ export var RatingsHeader = React.createClass({
 				              ref="review_name" 
 				              name="name" 
 				              autoComplete="name"
-				              autoFocus="true" 
 				              pattern="^.{2,}$"
 				              required/>
 				          <label htmlFor="review_name" className="active" data-error="Please enter at least 2 Characters">Your Name</label>
@@ -174,10 +173,10 @@ export var RatingsHeader = React.createClass({
 		}
 
 	  return (
-	    	<section id="restaurant-ratings" className="">
+	    	<section id="restaurant-ratings" className="card-panel">
 
 		    	<div className="col s12 m6 l4 offset-l1 center">
-		    		<div className="">{avg}</div>
+		    		<div className="rating-avg">{avg}</div>
 				    <div className="stars-rating stars-rating-small center">
 				    	<StarsRating avg={avg} />
 				    </div>

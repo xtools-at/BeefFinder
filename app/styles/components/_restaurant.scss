@@ -46,10 +46,17 @@
 			line-height: 2rem;
 			background-color: transparent;
 		}
+
+		.collection-item.active {
+			background-color: $secondary-color;
+		}
+		.collection-item.collapsible-header.active {
+			color: $primary-text-color;
+		}
+
 		.collection-item>i.material-icons{
 			float:left;
 			line-height:1.9rem;
-			padding-right:10px;
 			color:$primary-color;
 		}
 		.collection-item>a{
@@ -58,6 +65,12 @@
 
 		.collection-item:first-child {
 			border-top: 1px solid #e0e0e0;
+		}
+	}
+
+	.collection.hours {
+		.collection-item {
+			padding-left: 64px;
 		}
 	}
 

@@ -4,6 +4,7 @@ import firebase from 'app/firebase/';
 import sideNav from 'materialize-css/dist/js/materialize.min';
 
 import * as actions from 'actions';
+import Helper from 'Helper';
 
 export var Header = React.createClass({
 	componentDidMount() {
@@ -43,6 +44,11 @@ export var Header = React.createClass({
       });
 
       //console.log(sortingString, filtersObj);
+
+      //easteregg
+      if ($('#nav input[type="checkbox"]').length == $('#nav input[type="checkbox"]:not(:checked)').length) {
+        Helper.toast('Hey, are you the QA-Guy??');
+      }
 
       dispatch(actions.setFilters(filtersObj, sortingString));
     },

@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
+import moment from 'moment';
 import * as actions from 'actions';
 
 import Preloader from 'Preloader';
@@ -27,6 +28,11 @@ export var RestaurantDetail = React.createClass({
     $('h1').focus();
     $('#nav, .button-collapse').addClass('hide');
     $('.nav-back').removeClass('hide');
+
+
+    $('.collapsible').collapsible({
+      accordion : false
+    });
   },
   componentWillUnmount() {
 
@@ -74,10 +80,118 @@ export var RestaurantDetail = React.createClass({
         );
       }
 
+      //show opening hours
+      var renderHours = () => {
+        //TODO: sort by weekdays in DB
+
+        return hours.map((hour, index) => {
+          //hour = {day: "Mon", from: "12:00", to: "21:00"}
+
+          //highlight today in list
+          var addClass = "";
+          var openOrClosed = '';
+
+          if (moment().format('ddd') == hour.day) {
+            addClass = " active";
+
+            
+            var from = ""+moment().format('YYYY-MM-DD')+"T"+hour.from;
+            var to = ""+moment().format('YYYY-MM-DD')+"T"+hour.to;
+
+            //correct glitch with closings after 00:00
+            if (hour.to.startsWith('0')){
+              var h = parseInt(hour.to.split(':')[0]);
+              if (h <= 4) {
+                //restaurant closes after 00:00
+                to = ""+moment().add(1, 'd').format('YYYY-MM-DD')+"T"+hour.to;
+              }
+            }
+
+            console.log('hour: ',from, to);
+            
+            if (moment(from).isBefore(moment()) && moment().isBefore(moment(to))) {
+              //it's open!
+              openOrClosed = (
+                <span className="hours open"> Open Now!</span>
+              );
+            } else {
+              openOrClosed = (
+                <span className="hours closed"> Closed</span>
+              );
+            }
+          }
+
+
+          //fix display "closed - closed"
+          var hourItem;
+          if (hour.from != 'closed') {
+            hourItem = <span>{`${hour.day}:  ${hour.from} - ${hour.to}`}</span>
+          } else {
+            hourItem = <span>{`${hour.day}:  Closed`}</span>
+          }
+
+          return (
+            <li className={"collection-item"+addClass} key={index}>
+              {hourItem}
+              {openOrClosed}
+            </li>
+          );
+        });
+
+      }
+
+
+
+      //show opening header
+      var renderHoursHeading = () => {
+
+        return hours.map((hour, index) => {
+          //hour = {day: "Mon", from: "12:00", to: "21:00"}
+
+          var openOrClosed = '';
+
+          if (moment().format('ddd') == hour.day) {
+
+            
+            var from = ""+moment().format('YYYY-MM-DD')+"T"+hour.from;
+            var to = ""+moment().format('YYYY-MM-DD')+"T"+hour.to;
+
+            //correct glitch with closings after 00:00
+            if (hour.to.startsWith('0')){
+              var h = parseInt(hour.to.split(':')[0]);
+              if (h <= 4) {
+                //restaurant closes after 00:00
+                to = ""+moment().add(1, 'd').format('YYYY-MM-DD')+"T"+hour.to;
+              }
+            }
+
+            if (hour.from != 'closed') {
+              if (moment(from).isBefore(moment()) && moment().isBefore(moment(to))) {
+                //it's open!
+                openOrClosed = (
+                  <span className="hours open"> Open Now until {hour.to}</span>
+                );
+              } else {
+                openOrClosed = (
+                  <span className="hours closed"> Closed until {hour.from}</span>
+                );
+              }
+            } else {
+                openOrClosed = (
+                  <span className="hours closed"> Closed Today</span>
+                );
+            }
+          }
+
+          return openOrClosed;
+        });
+
+      }
+
       //if we've got restaurants
       return (
-        <section id="restaurant-detail" className="col s12 m10 offset-m1 l10 offset-l1">
-          <div className="card horizontal" id={id}>
+        <div id="restaurant-detail" className="col s12 m10 offset-m1 l10 offset-l1">
+          <section className="card horizontal" id={id}>
             <div className="card-image">
               <img src={`https://loremflickr.com/360/250/steak,food,meat/all?random=${id}`} alt="" />
             </div>
@@ -94,26 +208,37 @@ export var RestaurantDetail = React.createClass({
                   <TagCategories categories={categories} />
                   <TagPrice priceLevel={priceLevel} />
                 </div>
-                <ul className="collection">
-                <li className="collection-item">
+
+              <ul className="collection collapsible">
+                <li className="collection-item collapsible-header">
                   <i className="material-icons">location_on</i>
                   <a href={`https://www.google.com/maps?q=${encodeURIComponent(title)}&near=${address.lat},${address.lng}`} target="_blank" title={`View ${title} on GoogleMaps`}>{address.street}, {address.zip}</a>
                   <TagDistance address={address} userLat={storage.userLat} userLng={storage.userLng} />
                 </li>
-                <li className="collection-item">
+                <li className="collection-item collapsible-header">
                   <i className="material-icons">phone</i>
                   <a href={`tel:${tel.replace(/ /g,'')}`} target="_blank" title={`Call ${title}`}>{tel}</a>
                 </li>
+                <li className="">
+                  <a className="collapsible-header collection-item" aria-controls="hours-container" >
+                    <i className="material-icons">access_time</i>
+                    {renderHoursHeading()}
+                  </a>
+                  <div id="hours-container" className="collapsible-body" aria-live="polite">
+                    <ul className="collection hours">
+                      {renderHours()}
+                    </ul>
+                  </div>
+                </li>
               </ul>
+
               <div className="">{description}</div>
               </div>
             </div>
-          </div>
-          <div className="card-panel">
-            <RatingsHeader avg={rating.avg} count={rating.count} reference={id} />
-          </div>
+          </section>
+          <RatingsHeader avg={rating.avg} count={rating.count} reference={id} />
           <RatingsList />
-        </section>
+        </div>
       );
     };
 

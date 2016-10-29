@@ -13,12 +13,11 @@ export var RatingsListItem = React.createClass({
 	    return (
 
 		    <div className="card-panel" id={id}>
-	          <div className="">
 	            <div className="col s3 m2">
 	              <img src={`https://loremflickr.com/200/200/person,face/all?random=${index}`} alt="" className="circle responsive-img" />
 	            </div>
 	            <div className="col s9 m10">
-	            	<StarsRating avg={rating} />
+	              <StarsRating avg={rating} />
 	              <p className="black-text clearfix">
 	                {name} <span className="grey-text">
 	                {moment(date).format('@ D.MMM.\'YY')}
@@ -29,7 +28,6 @@ export var RatingsListItem = React.createClass({
 	              </p>
 	            </div>
 	            <div className="clearfix"></div>
-	          </div>
 	        </div>
 	    )
 	  }
