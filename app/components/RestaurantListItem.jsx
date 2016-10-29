@@ -11,12 +11,12 @@ import TagCategories from 'TagCategories';
 export var RestaurantListItem = React.createClass({
 	render() {
 
-	  	var {id, title, tel, priceLevel, categories, address, hours, rating, userLat, userLng, index} = this.props;
+	  	var {id, title, tel, priceLevel, categories, address, hours, rating, userLat, userLng} = this.props;
 
 	    return (
 		    <div className="card horizontal" id={id} onClick={this.onItemClick}>
 		      <div className="card-image">
-		        <img src={"https://loremflickr.com/280/360/steak,food,meat/all?random="+index} alt="" />
+		        <img src={"https://loremflickr.com/280/360/steak,food,meat/all?random="+id} alt="" />
 		      </div>
 		      <div className="card-stacked">
 		        <div className="card-content">
