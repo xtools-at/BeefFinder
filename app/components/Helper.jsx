@@ -18,30 +18,163 @@ export default {
 };
 
 export var Filter = {
-  filter: function (restaurants, showCompleted, searchText) {
+  filterRestaurants: function (restaurants, filterObj, sortBy) {
+	console.log('called w/: ',restaurants, filterObj, sortBy);
+
     var filteredRestaurants = restaurants;
 
-    // Filter by showCompleted
-    filteredRestaurants = filteredRestaurants.filter((restaurant) => {
-      return !restaurant.completed || showCompleted;
+    //get relevant filters
+    var categoryFilters = [];
+    var priceFilters = [];
+
+    Object.keys(filterObj).forEach((filterId) => {
+    	//checks if filter is set to true
+        if (filterObj[filterId]) {
+        	var cleanFilterId = filterId.replace('switch_','');
+
+        	if (cleanFilterId.startsWith('price')){
+        		cleanFilterId = parseInt(cleanFilterId.replace('price',''));
+        		priceFilters.push(cleanFilterId);
+        	} else {
+        		categoryFilters.push(cleanFilterId);
+        	}
+        }
+        //SHOW applied Filters!
     });
 
-    // Filter by searchText
-    filteredRestaurants = filteredRestaurants.filter((restaurant) => {
-      var text = restaurant.text.toLowerCase();
-      return searchText.length === 0 || text.indexOf(searchText) > -1;
-    });
+    console.log('appliedFilters: ', categoryFilters, priceFilters);
 
-    // Sort restaurants with non-completed first
-    filteredRestaurants.sort((a, b) => {
-      if (!a.completed && b.completed) {
-        return -1;
-      } else if (a.completed && !b.completed) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+    //filter categories
+   	if (categoryFilters.length > 0) {
+		filteredRestaurants = filteredRestaurants.filter((restaurant) => {
+
+			//convert to lowercase
+			var restaurantCategories = [];
+			for (var i = 0; i < restaurant.categories.length; i++) {
+				restaurantCategories.push(restaurant.categories[i].toLowerCase());
+			}
+
+			//check if categories are contained in filters
+			var showRestaurant = false;
+			restaurantCategories.filter((cat) => {
+				//no match yet
+				if (!showRestaurant) {
+					showRestaurant = categoryFilters.includes(cat);
+				}
+			});
+
+			return showRestaurant;
+		});
+
+    }
+
+    //filter by price
+	if (priceFilters.length > 0) {
+		filteredRestaurants = filteredRestaurants.filter((restaurant) => {
+			console.log('price filter', priceFilters.includes(restaurant.priceLevel));
+			return priceFilters.includes(restaurant.priceLevel);
+		});
+
+	}
+
+	//TODO handle no filters at all
+	    	
+	console.log('restaurants after filtering: ',filteredRestaurants);
+
+    //sort Restaurants
+    switch(sortBy){
+    	case 'BEST': 
+    		filteredRestaurants.sort((a, b) => {
+		      if (a.rating.avg > b.rating.avg) {
+		        return -1;
+		      } else if (a.rating.avg < b.rating.avg) {
+		        return 1;
+		      } else {
+		        if (a.rating.count > b.rating.count) {
+			        return -1;
+			    } else if (a.rating.count < b.rating.count) {
+			        return 1;
+			    } else {
+			        return 0;
+			    }
+		      }
+		    });
+		    break;
+    	case 'MOST':
+    		filteredRestaurants.sort((a, b) => {
+		      if (a.rating.count > b.rating.count) {
+		        return -1;
+		      } else if (a.rating.count < b.rating.count) {
+		        return 1;
+		      } else {
+		      	if (a.rating.avg > b.rating.avg) {
+			        return -1;
+			    } else if (a.rating.avg < b.rating.avg) {
+			        return 1;
+			    } else {
+		        	return 0;
+		        }
+		      }
+		    });
+		    break;
+    	case 'PRICE_ASC':
+    		filteredRestaurants.sort((a, b) => {
+		      if (a.priceLevel < b.priceLevel) {
+		        return -1;
+		      } else if (a.priceLevel > b.priceLevel) {
+		        return 1;
+		      } else {
+		      	if (a.rating.avg > b.rating.avg) {
+			        return -1;
+			    } else if (a.rating.avg < b.rating.avg) {
+			        return 1;
+			    } else {
+		        	return 0;
+		        }
+		      }
+		    });
+		    break;
+    	case 'PRICE_DESC':
+    		filteredRestaurants.sort((a, b) => {
+		      if (a.priceLevel > b.priceLevel) {
+		        return -1;
+		      } else if (a.priceLevel < b.priceLevel) {
+		        return 1;
+		      } else {
+		      	if (a.rating.avg > b.rating.avg) {
+			        return -1;
+			    } else if (a.rating.avg < b.rating.avg) {
+			        return 1;
+			    } else {
+		        	return 0;
+		        }
+		      }
+		    });
+		    break;
+    	case 'ALGO':
+			filteredRestaurants.sort((a, b) => {
+				var scoreA = a.rating.count*0.1 + a.rating.avg*3.0;
+				var scoreB = b.rating.count*0.1 + b.rating.avg*3.0;
+		      if (scoreA > scoreB) {
+		        return -1;
+		      } else if (scoreA < scoreB) {
+		        return 1;
+		      } else {
+		      	if (a.rating.avg > b.rating.avg) {
+			        return -1;
+			    } else if (a.rating.avg < b.rating.avg) {
+			        return 1;
+			    } else {
+		        	return 0;
+		        }
+		      }
+		    });
+		    break;
+    	default:
+    		break;
+    }
+
+    console.log('restaurants after sorting: ',filteredRestaurants);
 
     return filteredRestaurants;
   }

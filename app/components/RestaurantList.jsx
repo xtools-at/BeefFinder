@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
+import {Filter} from 'Helper';
 import RestaurantListItem from 'RestaurantListItem';
 import Preloader from 'Preloader';
 
@@ -9,7 +10,8 @@ export var RestaurantList = React.createClass({
       $('h1').focus();  
   },
   render() {
-    var {restaurants, storage} = this.props;
+    var {restaurants, storage, filter} = this.props;
+    
     var renderRestaurants = () => {
 
       if (restaurants.length === 0) {
@@ -18,7 +20,9 @@ export var RestaurantList = React.createClass({
         );
       }
 
-      return restaurants.map((restaurant, index) => {
+      //filter the list
+      var filteredRestaurants = Filter.filterRestaurants(restaurants, filter.filters, filter.sortBy);
+      return filteredRestaurants.map((restaurant, index) => {
         return (
           <RestaurantListItem key={index} index={index} userLat={storage.userLat} userLng={storage.userLng} {...restaurant}/>
         );
@@ -37,9 +41,6 @@ export var RestaurantList = React.createClass({
 
 export default Redux.connect(
   (state) => {
-    return {
-      restaurants: state.restaurants,
-      storage: state.storage
-    };
+    return state;
   }
 )(RestaurantList);

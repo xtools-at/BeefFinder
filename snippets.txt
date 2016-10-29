@@ -85,3 +85,15 @@ onSearch: function (e) {
     )
   }
 });
+
+
+
+      var todos = snapshot.val() || {};
+      var parsedTodos = [];
+
+      Object.keys(todos).forEach((todoId) => {
+        parsedTodos.push({
+          id: todoId,
+          ...todos[todoId]
+        });
+      });

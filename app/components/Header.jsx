@@ -2,9 +2,6 @@ import React from 'react';
 import * as Redux from 'react-redux';
 import firebase from 'app/firebase/';
 import sideNav from 'materialize-css/dist/js/materialize.min';
-//import material_select from 'materialize-css/dist/js/materialize.min';
-
-import {Filter} from 'Helper';
 
 import * as actions from 'actions';
 
@@ -12,7 +9,6 @@ export var Header = React.createClass({
 	componentDidMount() {
       //init sideNav
     	$(".button-collapse").sideNav();
-      //$('select').material_select();
 	},
 
 	onLogout(ev){
@@ -28,7 +24,7 @@ export var Header = React.createClass({
 
     filtersChanged(ev){
 
-      //do not fiddle with select-box
+      //do not fiddle with select-boxes
       var $t = $(ev.target);
       if ($t.is('input[type="checkbox"]')){
         $t.attr('checked','false');
@@ -79,10 +75,10 @@ export var Header = React.createClass({
 							     </div>
                 </li>
                 <li className="">
-                  <label htmlFor="select-sorting" className="subheader a"><i className="material-icons left">sort</i>Sort Restaurants by</label>
+                  <label htmlFor="select-sorting" className="subheader a"><i className="material-icons left">sort</i>Sort by</label>
                   <select id="select-sorting" className="browser-default a waves-effect" defaultValue={sortBy} onChange={this.filtersChanged}>
-                    <option value="BEST">Best Rated</option>
-                    <option value="MOST">Most Rated</option>
+                    <option value="BEST">Top Rated</option>
+                    <option value="MOST">Most Reviewed</option>
                     <option value="PRICE_ASC">Cheapest</option>
                     <option value="PRICE_DESC">Most Expensive</option>
                     <option value="ALGO">Secret Algorithm</option>
@@ -90,11 +86,11 @@ export var Header = React.createClass({
                 </li>
                 <li><div className="divider"></div></li>
                 <li className="">
-                  <h3 className="subheader a"><i className="material-icons left">filter_list</i>Filter Restaurants by Category</h3>
+                  <h3 className="subheader a"><i className="material-icons left">filter_list</i>Filter by Food</h3>
                   <div className="clearfix"></div>
                   <div className="switch waves-effect">
-                    <label htmlFor="switch_steak">
-                      <input id="switch_steak" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_steak}></input>
+                    <label htmlFor="switch_steaks">
+                      <input id="switch_steaks" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_steaks}></input>
                       <span className="lever"></span>
                       Steak
                     </label>
@@ -116,15 +112,8 @@ export var Header = React.createClass({
                 </li>
                 <li><div className="divider"></div></li>
                 <li className="">
-                  <h3 className="subheader a"><i className="material-icons left">euro_symbol</i>Filter Restaurants by Price</h3>
+                  <h3 className="subheader a"><i className="material-icons left">euro_symbol</i>Filter by Price</h3>
                   <div className="clearfix"></div>
-                  <div className="switch waves-effect">
-                    <label htmlFor="switch_price1">
-                      <input id="switch_price1" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_price1}></input>
-                      <span className="lever"></span>
-                      Cheap
-                    </label>
-                  </div>
                   <div className="switch waves-effect">
                     <label htmlFor="switch_price2">
                       <input id="switch_price2" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_price2}></input>
@@ -135,6 +124,13 @@ export var Header = React.createClass({
                   <div className="switch waves-effect">
                     <label htmlFor="switch_price3">
                       <input id="switch_price3" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_price3}></input>
+                      <span className="lever"></span>
+                      Reasonable
+                    </label>
+                  </div>
+                  <div className="switch waves-effect">
+                    <label htmlFor="switch_price4">
+                      <input id="switch_price4" type="checkbox" onChange={this.filtersChanged} checked={filters.switch_price4}></input>
                       <span className="lever"></span>
                       Expensive
                     </label>

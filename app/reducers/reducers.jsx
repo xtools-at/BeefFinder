@@ -2,12 +2,13 @@ import moment from 'moment';
 
 export var filtersReducer = (state = {
   filters: {
-    switch_steak: true,
+    switch_steaks: true,
     switch_burgers: true,
     switch_grill: true,
     switch_price1: true,
     switch_price2: true,
-    switch_price3: true
+    switch_price3: true,
+    switch_price4: true
   },
   sortBy: 'BEST'
 }, action) => {
